@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>Sales &amp; Marketing Call Center Dashboard | ThankGod Timipere Austin</title>
+<style>
+  *{box-sizing:border-box; margin:0; padding:0; font-family:'Segoe UI', Arial, sans-serif;}
+  body{background:#11161d; color:#dfe3ea;}
+  .board{width:1240px; margin:0 auto; padding:14px;}
+  .topbar{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+  .topbar h1{font-size:18px; font-weight:600; color:#fff;}
+  .select{background:#1c232e; border:1px solid #2c3644; color:#dfe3ea; font-size:12px; padding:7px 12px; border-radius:5px;}
+
+  .kpirow{display:grid; grid-template-columns:repeat(4,1fr) 130px 130px 90px 90px; gap:10px; margin-bottom:12px;}
+  .kpi{background:#1c232e; border-radius:6px; padding:10px 12px;}
+  .kpi .lbl{font-size:10px; color:#8a93a5;}
+  .kpi .val{font-size:18px; font-weight:700; color:#fff; margin-top:3px;}
+  .kpi.icon{display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:4px;}
+  .kpi.icon .ic{font-size:20px;}
+  .kpi.icon .lbl{font-size:9px;}
+  .btn{background:#2c3644; color:#dfe3ea; font-size:11px; font-weight:600; border-radius:6px; display:flex; align-items:center; justify-content:center; text-align:center;}
+  .btn.active{background:#d1382e; color:#fff;}
+
+  .cols{display:grid; grid-template-columns:280px 250px 300px 1fr; gap:12px;}
+  .panel{background:#1c232e; border-radius:8px; padding:12px;}
+  .panel h2{font-size:11px; font-weight:700; color:#c6cdda; margin-bottom:10px; text-transform:none;}
+
+  .hbars{display:flex; flex-direction:column; gap:5px;}
+  .hbar-row{display:flex; align-items:center; gap:6px; font-size:10px;}
+  .hbar-row .lbl{width:82px; flex-shrink:0; color:#9aa3b5; text-align:right;}
+  .hbar-row .track{flex:1; background:#12161d; border-radius:2px; height:11px;}
+  .hbar-row .fill{height:100%; border-radius:2px; background:#e8622c;}
+  .hbar-row.highlight .fill{background:#f2a33d;}
+  .hbar-row .val{width:44px; font-weight:700; color:#dfe3ea; font-size:9.5px;}
+
+  .stackbar{display:flex; height:16px; border-radius:3px; overflow:hidden; margin-top:10px;}
+  .stackbar .a{background:#d1382e; width:69%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#fff;}
+  .stackbar .b{background:#3a4456; width:31%; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#c6cdda;}
+  .stacklegend{display:flex; justify-content:space-between; font-size:9px; color:#8a93a5; margin-top:5px;}
+
+  .donutwrap{display:flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:14px;}
+  .donutwrap .pct{font-size:9px; color:#8a93a5;}
+
+  .statrow{background:#12161d; border-radius:6px; padding:8px 10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;}
+  .statrow .l{font-size:10px; color:#9aa3b5;}
+  .statrow .v{font-size:14px; font-weight:700; color:#fff;}
+
+  .prodlegend{display:flex; gap:12px; font-size:9.5px; color:#9aa3b5; margin-bottom:8px;}
+  .prodlegend span{display:inline-flex; align-items:center; gap:4px;}
+  .dot{width:7px; height:7px; border-radius:2px; display:inline-block;}
+  .prodrow{display:flex; align-items:center; justify-content:space-between; font-size:10px; color:#c6cdda; padding:5px 0; border-top:1px solid #2c3644;}
+  .prodrow:first-of-type{border-top:none;}
+  .prodrow .nums{display:flex; gap:6px;}
+  .prodrow .nums span{padding:2px 6px; border-radius:3px; font-weight:700; font-size:9.5px;}
+  .nums .succ{background:#1f4d2e; color:#5fd37c;}
+  .nums .fail{background:#3a2020; color:#e08a8a;}
+
+  .reasonrow{display:flex; align-items:center; gap:8px; font-size:10px; margin-bottom:6px;}
+  .reasonrow .lbl{width:110px; flex-shrink:0; color:#9aa3b5;}
+  .reasonrow .track{flex:1; background:#12161d; border-radius:2px; height:11px;}
+  .reasonrow .fill{height:100%; border-radius:2px; background:#3a4456;}
+  .reasonrow .val{width:28px; text-align:right; font-weight:700; color:#dfe3ea;}
+
+  .back{display:inline-block; margin-bottom:12px; font-size:13px; color:#f2a33d; text-decoration:none; font-weight:600;}
+</style>
+</head>
+<body>
+<div style="max-width:1240px;margin:0 auto;padding-top:14px;">
+  <a class="back" href="../index.html#projects">&larr; Back to Portfolio</a>
+</div>
+<div class="board">
+  <div class="topbar">
+    <h1>&#128222; Sales &amp; Marketing Call Center</h1>
+    <select class="select"><option>Liam Martinez</option></select>
+  </div>
+
+  <div class="kpirow">
+    <div class="kpi"><div class="lbl">Total Calls</div><div class="val">200,000</div></div>
+    <div class="kpi"><div class="lbl">Successful calls</div><div class="val">83,519</div></div>
+    <div class="kpi"><div class="lbl">Failed Calls</div><div class="val">71,837</div></div>
+    <div class="kpi"><div class="lbl">Abandoned Calls</div><div class="val">44,644</div></div>
+    <div class="kpi icon"><div class="ic">&#128100;</div><div class="lbl">Total Calls from Male</div></div>
+    <div class="kpi icon"><div class="ic">&#128100;</div><div class="lbl">Total Calls from Female</div></div>
+    <div class="kpi btn">Show Map</div>
+    <div class="kpi btn active">Show Chart</div>
+  </div>
+
+  <div class="cols">
+    <!-- AGENTS -->
+    <div class="panel">
+      <h2>Total Calls By Agents</h2>
+      <div class="hbars">
+        <div class="hbar-row"><span class="lbl">Ava Sandoval</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">40,000</span></div>
+        <div class="hbar-row"><span class="lbl">Elijah Hawkins</span><span class="track"><span class="fill" style="width:80%"></span></span><span class="val">32,000</span></div>
+        <div class="hbar-row"><span class="lbl">Drew Clay</span><span class="track"><span class="fill" style="width:70%"></span></span><span class="val">28,000</span></div>
+        <div class="hbar-row"><span class="lbl">Ray Mason</span><span class="track"><span class="fill" style="width:50%"></span></span><span class="val">20,000</span></div>
+        <div class="hbar-row"><span class="lbl">Olivia Lyons</span><span class="track"><span class="fill" style="width:45%"></span></span><span class="val">18,000</span></div>
+        <div class="hbar-row"><span class="lbl">Monique...</span><span class="track"><span class="fill" style="width:40%"></span></span><span class="val">16,000</span></div>
+        <div class="hbar-row"><span class="lbl">Michael Page</span><span class="track"><span class="fill" style="width:30%"></span></span><span class="val">12,000</span></div>
+        <div class="hbar-row highlight"><span class="lbl">Liam Martinez</span><span class="track"><span class="fill" style="width:25%"></span></span><span class="val">10,000</span></div>
+        <div class="hbar-row"><span class="lbl">Zoe Newman</span><span class="track"><span class="fill" style="width:20%"></span></span><span class="val">8,000</span></div>
+        <div class="hbar-row"><span class="lbl">Sophia Delacruz</span><span class="track"><span class="fill" style="width:15%"></span></span><span class="val">6,000</span></div>
+        <div class="hbar-row"><span class="lbl">Sarah Walter</span><span class="track"><span class="fill" style="width:10%"></span></span><span class="val">4,000</span></div>
+        <div class="hbar-row"><span class="lbl">Katrina Williams</span><span class="track"><span class="fill" style="width:10%"></span></span><span class="val">4,000</span></div>
+        <div class="hbar-row"><span class="lbl">Samuel Smith</span><span class="track"><span class="fill" style="width:5%"></span></span><span class="val">2,000</span></div>
+      </div>
+      <div class="stackbar"><div class="a">69%</div><div class="b">31%</div></div>
+      <div class="stacklegend"><span>&#9733; Call by Top Five Agents</span><span>others</span></div>
+    </div>
+
+    <!-- OUTCOME -->
+    <div class="panel">
+      <h2>Liam Martinez call out come</h2>
+      <div class="donutwrap">
+        <svg width="90" height="90" viewBox="0 0 42 42">
+          <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#12161d" stroke-width="6"></circle>
+          <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#3aa63a" stroke-width="6" stroke-dasharray="90 10" stroke-dashoffset="25" transform="rotate(-90 21 21)"></circle>
+          <text x="21" y="24" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">90%</text>
+        </svg>
+        <div class="pct">Call were Successful</div>
+      </div>
+      <div class="statrow"><span class="l">Liam Martinez Average Customer</span><span class="v">4.3</span></div>
+      <div class="statrow"><span class="l">Liam Martinez Average Call</span><span class="v">16.6</span></div>
+      <h2 style="margin-top:10px;">Liam Martinez Product Discussed on calls</h2>
+      <div class="prodlegend"><span><i class="dot" style="background:#3aa63a"></i>Success</span><span><i class="dot" style="background:#3a4456"></i>Failure</span></div>
+      <div class="prodrow"><span>Travel Package</span><span class="nums"><span class="succ">1,239</span><span class="fail">68</span></span></div>
+      <div class="prodrow"><span>Loans</span><span class="nums"><span class="succ">2,948</span><span class="fail">159</span></span></div>
+      <div class="prodrow"><span>Internet Package</span><span class="nums"><span class="succ">2,873</span><span class="fail">150</span></span></div>
+      <div class="prodrow"><span>Insurance</span><span class="nums"><span class="succ">415</span><span class="fail">30</span></span></div>
+      <div class="prodrow"><span>Electronics</span><span class="nums"><span class="succ">1,518</span><span class="fail">92</span></span></div>
+    </div>
+
+    <!-- REASONS + TREND -->
+    <div class="panel">
+      <h2>Reason why Liam Martinez Abandoned calls</h2>
+      <div class="reasonrow"><span class="lbl">Technical Issues</span><span class="track"><span class="fill" style="width:100%;background:#111"></span></span><span class="val">477</span></div>
+      <div class="reasonrow"><span class="lbl">long Wait Time</span><span class="track"><span class="fill" style="width:2%"></span></span><span class="val">9</span></div>
+      <div class="reasonrow"><span class="lbl">Customer Hung Up</span><span class="track"><span class="fill" style="width:1%"></span></span><span class="val">5</span></div>
+      <div class="reasonrow"><span class="lbl">Agent Not Available</span><span class="track"><span class="fill" style="width:2%"></span></span><span class="val">8</span></div>
+
+      <h2 style="margin-top:14px;">Liam Martinez Monthly Call Trend</h2>
+      <svg width="100%" height="130" viewBox="0 0 280 130" preserveAspectRatio="none">
+        <polyline points="10,45 34,20 58,42 82,15 106,38 130,10 154,44 178,22 202,40 226,26 250,48 270,32"
+          fill="none" stroke="#4a90e2" stroke-width="2"/>
+        <g fill="#4a90e2">
+          <circle cx="10" cy="45" r="2.5"/><circle cx="34" cy="20" r="2.5"/><circle cx="58" cy="42" r="2.5"/>
+          <circle cx="82" cy="15" r="2.5"/><circle cx="106" cy="38" r="2.5"/><circle cx="130" cy="10" r="4" fill="#f2a33d"/>
+          <circle cx="154" cy="44" r="2.5"/><circle cx="178" cy="22" r="2.5"/><circle cx="202" cy="40" r="2.5"/>
+          <circle cx="226" cy="26" r="2.5"/><circle cx="250" cy="48" r="2.5"/><circle cx="270" cy="32" r="2.5"/>
+        </g>
+        <text x="130" y="5" text-anchor="middle" font-size="9" font-weight="700" fill="#f2a33d">885</text>
+        <g font-size="8" fill="#8a93a5" text-anchor="middle">
+          <text x="10" y="122">Jan</text><text x="34" y="122">Feb</text><text x="58" y="122">Mar</text>
+          <text x="82" y="122">Apr</text><text x="106" y="122">May</text><text x="130" y="122">Jun</text>
+          <text x="154" y="122">Jul</text><text x="178" y="122">Aug</text><text x="202" y="122">Sep</text>
+          <text x="226" y="122">Oct</text><text x="250" y="122">Nov</text><text x="270" y="122">Dec</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- STATES -->
+    <div class="panel">
+      <h2>Calls by State</h2>
+      <div class="hbars">
+        <div class="hbar-row"><span class="lbl">New York</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">1,651</span></div>
+        <div class="hbar-row"><span class="lbl">North Carolina</span><span class="track"><span class="fill" style="width:73%"></span></span><span class="val">1,209</span></div>
+        <div class="hbar-row"><span class="lbl">California</span><span class="track"><span class="fill" style="width:72%"></span></span><span class="val">1,186</span></div>
+        <div class="hbar-row"><span class="lbl">Nevada</span><span class="track"><span class="fill" style="width:61%"></span></span><span class="val">1,003</span></div>
+        <div class="hbar-row"><span class="lbl">Texas</span><span class="track"><span class="fill" style="width:50%"></span></span><span class="val">825</span></div>
+        <div class="hbar-row"><span class="lbl">Colorado</span><span class="track"><span class="fill" style="width:48%"></span></span><span class="val">795</span></div>
+        <div class="hbar-row"><span class="lbl">Arizona</span><span class="track"><span class="fill" style="width:37%"></span></span><span class="val">610</span></div>
+        <div class="hbar-row"><span class="lbl">Washington</span><span class="track"><span class="fill" style="width:32%"></span></span><span class="val">533</span></div>
+        <div class="hbar-row"><span class="lbl">Georgia</span><span class="track"><span class="fill" style="width:31%"></span></span><span class="val">505</span></div>
+        <div class="hbar-row"><span class="lbl">Florida</span><span class="track"><span class="fill" style="width:25%"></span></span><span class="val">406</span></div>
+        <div class="hbar-row"><span class="lbl">Alabama</span><span class="track"><span class="fill" style="width:16%"></span></span><span class="val">268</span></div>
+        <div class="hbar-row"><span class="lbl">Oregon</span><span class="track"><span class="fill" style="width:12%"></span></span><span class="val">203</span></div>
+        <div class="hbar-row"><span class="lbl">Michigan</span><span class="track"><span class="fill" style="width:10%"></span></span><span class="val">167</span></div>
+        <div class="hbar-row"><span class="lbl">Maryland</span><span class="track"><span class="fill" style="width:6%"></span></span><span class="val">94</span></div>
+        <div class="hbar-row"><span class="lbl">Pennsylvania</span><span class="track"><span class="fill" style="width:6%"></span></span><span class="val">94</span></div>
+        <div class="hbar-row"><span class="lbl">Massachusetts</span><span class="track"><span class="fill" style="width:5%"></span></span><span class="val">91</span></div>
+        <div class="hbar-row"><span class="lbl">Virginia</span><span class="track"><span class="fill" style="width:5%"></span></span><span class="val">90</span></div>
+        <div class="hbar-row"><span class="lbl">Illinois</span><span class="track"><span class="fill" style="width:5%"></span></span><span class="val">87</span></div>
+        <div class="hbar-row"><span class="lbl">Ohio</span><span class="track"><span class="fill" style="width:5%"></span></span><span class="val">83</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

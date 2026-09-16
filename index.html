@@ -24,11 +24,6 @@
     --white: #ffffff;
     --display: 'Poppins', sans-serif;
     --body: 'Inter', sans-serif;
-    /* chart categorical (dark-surface validated) */
-    --c-blue: #3987e5;
-    --c-aqua: #199e70;
-    --c-red: #e66767;
-    --c-orange: #d95926;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -115,9 +110,8 @@
   .sectionhead h2{font-size:clamp(26px,3.4vw,34px); font-weight:800; margin:8px 0 12px; color:var(--ink);}
   .sectionhead p{color:var(--ink-dim); font-size:15.5px;}
 
-  .projects{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
-  @media (max-width:980px){ .projects{grid-template-columns:1fr 1fr;} }
-  @media (max-width:640px){ .projects{grid-template-columns:1fr;} }
+  .projects{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  @media (max-width:820px){ .projects{grid-template-columns:1fr;} }
   .pcard{
     background:var(--white); border:1px solid var(--line-light); border-radius:14px; overflow:hidden;
     box-shadow:0 10px 30px rgba(16,24,40,.06); display:flex; flex-direction:column;
@@ -134,24 +128,13 @@
 
   /* mini dashboard chrome */
   .dash-title{font-size:11.5px; font-weight:700; letter-spacing:.04em; color:#8b95ac; text-transform:uppercase; margin-bottom:12px;}
-  .kpirow{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:14px;}
-  .kpi{background:var(--navy-2); border:1px solid var(--line); border-radius:8px; padding:9px 8px; text-align:center;}
-  .kpi .v{font-family:var(--display); font-weight:700; font-size:15px; color:#fff; line-height:1.2;}
-  .kpi .l{font-size:9.5px; color:#8b95ac; margin-top:2px; letter-spacing:.02em;}
-  .chartrow{display:grid; grid-template-columns:1.3fr 1fr; gap:14px;}
-  .chartbox{background:var(--navy-2); border:1px solid var(--line); border-radius:8px; padding:12px;}
-  .chartbox .ct{font-size:10.5px; font-weight:700; color:#c7cddb; margin-bottom:8px;}
-  .barline{display:flex; align-items:center; gap:6px; margin-bottom:6px; font-size:9.5px;}
-  .barline .lbl{width:64px; flex-shrink:0; color:#9aa3b8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .barline .track{flex:1; height:7px; background:#0f1728; border-radius:4px; overflow:hidden;}
-  .barline .fill{height:100%; border-radius:4px; background:var(--c-blue);}
-  .barline .val{width:30px; text-align:right; color:#c7cddb; font-weight:600;}
-  .donutwrap{display:flex; flex-direction:column; align-items:center; gap:8px;}
-  .donut-legend{display:flex; gap:10px; font-size:9.5px; color:#c7cddb;}
-  .donut-legend span{display:inline-flex; align-items:center; gap:4px;}
-  .dot{width:7px; height:7px; border-radius:50%; display:inline-block;}
   .simple-shot{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; min-height:150px;}
   .app-icon{width:56px; height:56px; border-radius:14px; background:rgba(229,56,77,.15); display:flex; align-items:center; justify-content:center; font-size:26px;}
+
+  /* live dashboard preview (scaled iframe of the real replica page) */
+  .dash-preview{padding:0; background:#11161d;}
+  .dash-frame-wrap{position:relative; overflow:hidden; width:100%;}
+  .dash-frame-wrap iframe{position:absolute; top:0; left:0; border:none; transform-origin:top left; pointer-events:none;}
 
   /* ABOUT */
   .about{background:var(--white);}
@@ -253,90 +236,49 @@
     <div class="projects">
 
       <article class="pcard">
-        <div class="pcard-shot">
-          <div class="dash-title">HR Attrition Dashboard</div>
-          <div class="kpirow">
-            <div class="kpi"><div class="v">266</div><div class="l">Employees</div></div>
-            <div class="kpi"><div class="v">210</div><div class="l">Active</div></div>
-            <div class="kpi"><div class="v">56</div><div class="l">Left</div></div>
-            <div class="kpi"><div class="v">79%</div><div class="l">Retention</div></div>
-          </div>
-          <div class="chartrow">
-            <div class="chartbox">
-              <div class="ct">Attrition Rate by Dept.</div>
-              <div class="barline"><span class="lbl">Engineering</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">37%</span></div>
-              <div class="barline"><span class="lbl">Data &amp; Analytics</span><span class="track"><span class="fill" style="width:73%"></span></span><span class="val">27%</span></div>
-              <div class="barline"><span class="lbl">Cust. Service</span><span class="track"><span class="fill" style="width:68%"></span></span><span class="val">25%</span></div>
-              <div class="barline"><span class="lbl">Finance</span><span class="track"><span class="fill" style="width:51%"></span></span><span class="val">19%</span></div>
-            </div>
-            <div class="chartbox">
-              <div class="ct">Retention</div>
-              <div class="donutwrap">
-                <svg width="90" height="90" viewBox="0 0 42 42" role="img" aria-label="Retention rate 79 percent, attrition 21 percent">
-                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#0f1728" stroke-width="5"></circle>
-                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="var(--c-aqua)" stroke-width="5" stroke-dasharray="79 21" stroke-dashoffset="25" transform="rotate(-90 21 21)"></circle>
-                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="var(--c-red)" stroke-width="5" stroke-dasharray="21 79" stroke-dashoffset="-54" transform="rotate(-90 21 21)"></circle>
-                  <text x="21" y="24" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">79%</text>
-                </svg>
-                <div class="donut-legend">
-                  <span><i class="dot" style="background:var(--c-aqua)"></i>Retained</span>
-                  <span><i class="dot" style="background:var(--c-red)"></i>Left</span>
-                </div>
-              </div>
-            </div>
+        <div class="pcard-shot dash-preview">
+          <div class="dash-frame-wrap" data-w="1200">
+            <iframe src="dashboards/hr-attrition.html" scrolling="no" tabindex="-1" title="HR Attrition Dashboard preview"></iframe>
           </div>
         </div>
         <div class="pcard-body">
           <h3>HR Employee Attrition Dashboard</h3>
-          <p>Power BI dashboard analyzing employee retention, attrition, workforce trends, and employee turnover across departments.</p>
+          <p>Power BI-style dashboard analyzing employee retention, attrition, workforce trends, and employee turnover across departments.</p>
           <div class="pcard-meta">
             <span class="tool-tag">Tool: <b>Power BI</b></span>
-            <a class="viewlink" href="https://github.com/timiperethankgod120-ship-it" target="_blank" rel="noopener">View Project &rarr;</a>
+            <a class="viewlink" href="dashboards/hr-attrition.html" target="_blank" rel="noopener">View Project &rarr;</a>
           </div>
         </div>
       </article>
 
       <article class="pcard">
-        <div class="pcard-shot">
-          <div class="dash-title">Retail Sales Dashboard</div>
-          <div class="kpirow">
-            <div class="kpi"><div class="v">&#8358;47m</div><div class="l">Revenue</div></div>
-            <div class="kpi"><div class="v">&#8358;14m</div><div class="l">Profit</div></div>
-            <div class="kpi"><div class="v">100</div><div class="l">Orders</div></div>
-            <div class="kpi"><div class="v">30%</div><div class="l">Margin</div></div>
-          </div>
-          <div class="chartrow">
-            <div class="chartbox">
-              <div class="ct">Revenue by Region</div>
-              <div class="barline"><span class="lbl">Lagos</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">&#8358;27m</span></div>
-              <div class="barline"><span class="lbl">Abuja</span><span class="track"><span class="fill" style="width:41%"></span></span><span class="val">&#8358;11m</span></div>
-              <div class="barline"><span class="lbl">Ibadan</span><span class="track"><span class="fill" style="width:37%"></span></span><span class="val">&#8358;10m</span></div>
-              <div class="barline"><span class="lbl">Port Harcourt</span><span class="track"><span class="fill" style="width:37%"></span></span><span class="val">&#8358;10m</span></div>
-            </div>
-            <div class="chartbox">
-              <div class="ct">Payment Method</div>
-              <div class="donutwrap">
-                <svg width="90" height="90" viewBox="0 0 42 42" role="img" aria-label="Card 41 percent, cash 22 percent, POS 20 percent, transfer 17 percent">
-                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="#0f1728" stroke-width="5"></circle>
-                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="var(--c-blue)" stroke-width="5" stroke-dasharray="41 59" stroke-dashoffset="25" transform="rotate(-90 21 21)"></circle>
-                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="var(--c-orange)" stroke-width="5" stroke-dasharray="22 78" stroke-dashoffset="-16" transform="rotate(-90 21 21)"></circle>
-                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="var(--c-aqua)" stroke-width="5" stroke-dasharray="20 80" stroke-dashoffset="-38" transform="rotate(-90 21 21)"></circle>
-                  <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="var(--c-red)" stroke-width="5" stroke-dasharray="17 83" stroke-dashoffset="-58" transform="rotate(-90 21 21)"></circle>
-                </svg>
-                <div class="donut-legend">
-                  <span><i class="dot" style="background:var(--c-blue)"></i>Card</span>
-                  <span><i class="dot" style="background:var(--c-orange)"></i>Cash</span>
-                </div>
-              </div>
-            </div>
+        <div class="pcard-shot dash-preview">
+          <div class="dash-frame-wrap" data-w="1200">
+            <iframe src="dashboards/retail-sales.html" scrolling="no" tabindex="-1" title="Retail Sales Dashboard preview"></iframe>
           </div>
         </div>
         <div class="pcard-body">
           <h3>Retail Sales Performance Dashboard</h3>
-          <p>Excel dashboard analyzing sales, revenue, profitability, products, and regional performance.</p>
+          <p>Excel-style dashboard analyzing sales, revenue, profitability, products, and regional performance.</p>
           <div class="pcard-meta">
             <span class="tool-tag">Tool: <b>Excel</b></span>
-            <a class="viewlink" href="https://github.com/timiperethankgod120-ship-it" target="_blank" rel="noopener">View Project &rarr;</a>
+            <a class="viewlink" href="dashboards/retail-sales.html" target="_blank" rel="noopener">View Project &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="pcard">
+        <div class="pcard-shot dash-preview">
+          <div class="dash-frame-wrap" data-w="1240">
+            <iframe src="dashboards/call-center.html" scrolling="no" tabindex="-1" title="Sales &amp; Marketing Call Center Dashboard preview"></iframe>
+          </div>
+        </div>
+        <div class="pcard-body">
+          <h3>Sales &amp; Marketing Call Center Dashboard</h3>
+          <p>Interactive-style dashboard analyzing agent performance, call outcomes, abandonment reasons, and call volume by state.</p>
+          <div class="pcard-meta">
+            <span class="tool-tag">Tool: <b>Power BI</b></span>
+            <a class="viewlink" href="dashboards/call-center.html" target="_blank" rel="noopener">View Project &rarr;</a>
           </div>
         </div>
       </article>
@@ -494,6 +436,27 @@
   });
   links.querySelectorAll('a').forEach(function(a){
     a.addEventListener('click', function(){ links.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+  });
+
+  document.querySelectorAll('.dash-frame-wrap').forEach(function(wrap){
+    var iframe = wrap.querySelector('iframe');
+    var w = parseInt(wrap.dataset.w, 10);
+    iframe.style.width = w + 'px';
+    function applyScale(){
+      var scale = wrap.clientWidth / w;
+      var h = iframe.dataset.naturalH ? parseInt(iframe.dataset.naturalH, 10) : Math.round(w * 0.55);
+      iframe.style.height = h + 'px';
+      iframe.style.transform = 'scale(' + scale + ')';
+      wrap.style.height = Math.round(h * scale) + 'px';
+    }
+    iframe.addEventListener('load', function(){
+      try{
+        iframe.dataset.naturalH = iframe.contentDocument.documentElement.scrollHeight;
+      }catch(e){}
+      applyScale();
+    });
+    window.addEventListener('resize', applyScale);
+    applyScale();
   });
 </script>
 </body>

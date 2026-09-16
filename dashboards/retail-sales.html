@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>Retail Sales Dashboard | ThankGod Timipere Austin</title>
+<style>
+  *{box-sizing:border-box; margin:0; padding:0; font-family:'Segoe UI', Arial, sans-serif;}
+  body{background:#eef1f5; color:#333;}
+  .board{width:1200px; margin:0 auto; padding:14px;}
+  .topbar{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+  .topbar h1{font-size:22px; font-weight:400; color:#555;}
+  .who{display:flex; align-items:center; gap:8px; font-size:13px; color:#444; font-weight:600;}
+  .who img{width:32px; height:32px; border-radius:50%; object-fit:cover; border:1px solid #ccc;}
+  .grid{display:grid; grid-template-columns:150px 1fr; gap:12px;}
+  .panel{background:#fff; border:1px solid #d8dde3; border-radius:4px; padding:10px;}
+  .panel h2{font-size:12px; font-weight:600; color:#333; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;}
+  .panel h2 .ic{color:#8a95a5; font-size:11px;}
+
+  /* sidebar filters */
+  .sidebar{display:flex; flex-direction:column; gap:10px;}
+  .filter-list{display:grid; grid-template-columns:1fr 1fr; gap:4px;}
+  .filter-list.single{grid-template-columns:1fr; max-height:78px; overflow-y:auto;}
+  .chip{background:#eaf2fb; border:1px solid #bcd6f0; color:#2a4f74; font-size:10.5px; padding:4px 5px; border-radius:2px; text-align:center;}
+
+  .main{display:flex; flex-direction:column; gap:12px;}
+  .kpirow{display:grid; grid-template-columns:repeat(5,1fr) 150px; gap:10px;}
+  .kpi{background:#dbe4ee; border-radius:6px; padding:10px 12px; display:flex; flex-direction:column; justify-content:center;}
+  .kpi .lbl{font-size:10.5px; color:#5a6b80; font-weight:600; display:flex; justify-content:space-between;}
+  .kpi .val{font-size:22px; font-weight:700; color:#1c2b3a; margin-top:4px;}
+  .datebox{background:#fff; border:1px solid #d8dde3; border-radius:6px; padding:8px 10px; font-size:10.5px; color:#5a6b80;}
+  .datebox .yr{font-weight:700; color:#1c2b3a; font-size:13px; margin-bottom:4px;}
+  .daterange{display:flex; align-items:center; justify-content:space-between; margin-top:6px; color:#8a95a5;}
+
+  .row3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;}
+
+  /* bar charts */
+  .vbars{display:flex; align-items:flex-end; gap:14px; height:150px; padding-left:24px; position:relative;}
+  .vbars .axis{position:absolute; left:0; top:0; bottom:20px; display:flex; flex-direction:column; justify-content:space-between; font-size:8.5px; color:#9aa4b2;}
+  .vbar-col{display:flex; flex-direction:column; align-items:center; justify-content:flex-end; flex:1; height:100%;}
+  .vbar-col .n{font-size:9px; color:#4472a8; font-weight:700; margin-bottom:3px;}
+  .vbar-col .bar{width:26px; background:#5b9bd5; border-radius:2px 2px 0 0;}
+  .vbar-col .lbl{font-size:8.5px; color:#7a8494; margin-top:4px; text-align:center;}
+
+  .hbars{display:flex; flex-direction:column; gap:7px;}
+  .hbar-row{display:flex; align-items:center; gap:6px; font-size:10px;}
+  .hbar-row .lbl{width:78px; flex-shrink:0; color:#5a6b80; text-align:right;}
+  .hbar-row .track{flex:1; background:#eef1f5; border-radius:2px; height:14px; position:relative;}
+  .hbar-row .fill{height:100%; border-radius:2px;}
+  .hbar-row .val{width:38px; font-weight:700; color:#4a4a4a;}
+  .fill-orange{background:#f4b183;}
+  .fill-gray{background:#a6a6a6;}
+  .fill-blue{background:#5b9bd5;}
+
+  /* line chart */
+  .linewrap{position:relative; height:150px;}
+  .peak-label{position:absolute; font-size:10px; font-weight:700; color:#2e7d32;}
+
+  .legend-row{display:flex; gap:14px; font-size:10px; color:#5a6b80; margin-top:8px; justify-content:center;}
+  .legend-row span{display:inline-flex; align-items:center; gap:4px;}
+  .dot{width:8px; height:8px; border-radius:2px; display:inline-block;}
+
+  .pie-wrap{display:flex; align-items:center; gap:16px;}
+  .pie{width:140px; height:140px; border-radius:50%; flex-shrink:0;
+    background:conic-gradient(#1f3864 0% 41%, #2e8b8b 41% 63%, #e8a33d 63% 83%, #c0504d 83% 100%);}
+  .pie-legend{display:flex; flex-direction:column; gap:6px; font-size:11px; color:#4a4a4a;}
+
+  .back{display:inline-block; margin-bottom:12px; font-size:13px; color:#2a4f74; text-decoration:none; font-weight:600;}
+</style>
+</head>
+<body>
+<div style="max-width:1200px;margin:0 auto;padding-top:14px;">
+  <a class="back" href="../index.html#projects">&larr; Back to Portfolio</a>
+</div>
+<div class="board">
+  <div class="topbar">
+    <h1>Retail Sales DashBoard - Updated 26 Aug 2026</h1>
+    <div class="who"><span>ThankGod T. Austin</span><img src="../assets/profile.jpg" alt="ThankGod T. Austin"></div>
+  </div>
+
+  <div class="grid">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="panel">
+        <h2>Region <span class="ic">&#9776; &#9660;</span></h2>
+        <div class="filter-list">
+          <span class="chip">Abuja</span><span class="chip">Calabar</span>
+          <span class="chip">Enugu</span><span class="chip">Ibadan</span>
+          <span class="chip">Kano</span><span class="chip">Lagos</span>
+          <span class="chip">Port Harcourt</span><span class="chip">Uyo</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Category <span class="ic">&#9776; &#9660;</span></h2>
+        <div class="filter-list single">
+          <span class="chip">Electronics</span>
+          <span class="chip">Home Office</span>
+          <span class="chip">Networking</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Salesperson <span class="ic">&#9776; &#9660;</span></h2>
+        <div class="filter-list">
+          <span class="chip">Ada</span><span class="chip">Bola</span>
+          <span class="chip">Chika</span><span class="chip">Ibrahim</span>
+          <span class="chip">Kunle</span><span class="chip">Mariam</span>
+          <span class="chip">Nneka</span><span class="chip">Sade</span>
+          <span class="chip">Tunde</span><span class="chip">Uche</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Payment Method <span class="ic">&#9776; &#9660;</span></h2>
+        <div class="filter-list">
+          <span class="chip">Card</span><span class="chip">Cash</span>
+          <span class="chip">POS</span><span class="chip">Transfer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="kpirow">
+        <div class="kpi"><div class="lbl">Total Revenue &#128200;</div><div class="val">&#8358;47m</div></div>
+        <div class="kpi"><div class="lbl">Total Profit &#128176;</div><div class="val">&#8358;14m</div></div>
+        <div class="kpi"><div class="lbl">Number of Orders &#128722;</div><div class="val">100</div></div>
+        <div class="kpi"><div class="lbl">Total Quantity &#128230;</div><div class="val">315</div></div>
+        <div class="kpi"><div class="lbl">Profit Margin &#128202;</div><div class="val">30%</div></div>
+        <div class="datebox">
+          Date &#9660;
+          <div class="yr">2026</div>
+          <div class="daterange"><span>&lt;</span><span>OCT &nbsp; NOV &nbsp; DEC</span><span>&gt;</span></div>
+        </div>
+      </div>
+
+      <div class="row3">
+        <div class="panel">
+          <h2>profit by Category</h2>
+          <div class="vbars">
+            <div class="axis"><span>&#8358;14m</span><span>&#8358;10m</span><span>&#8358;6m</span><span>&#8358;2m</span><span>&#8358;0m</span></div>
+            <div class="vbar-col"><div class="n">&#8358;2m</div><div class="bar" style="height:14%"></div><div class="lbl">Accessories</div></div>
+            <div class="vbar-col"><div class="n">&#8358;2m</div><div class="bar" style="height:14%"></div><div class="lbl">Business Tools</div></div>
+            <div class="vbar-col"><div class="n">&#8358;12m</div><div class="bar" style="height:86%"></div><div class="lbl">Electronics</div></div>
+            <div class="vbar-col"><div class="n">&#8358;7m</div><div class="bar" style="height:50%"></div><div class="lbl">Home Office</div></div>
+            <div class="vbar-col"><div class="n">&#8358;0m</div><div class="bar" style="height:2%"></div><div class="lbl">Networking</div></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Monthly Revenue Trend</h2>
+          <div class="linewrap">
+            <svg width="100%" height="150" viewBox="0 0 280 150" preserveAspectRatio="none">
+              <polyline points="20,105 66,91 112,15 158,113 204,68 250,91" fill="none" stroke="#2e7d32" stroke-width="2"/>
+              <g fill="#2e7d32">
+                <circle cx="20" cy="105" r="3"/><circle cx="66" cy="91" r="3"/><circle cx="112" cy="15" r="4"/>
+                <circle cx="158" cy="113" r="3"/><circle cx="204" cy="68" r="3"/><circle cx="250" cy="91" r="3"/>
+              </g>
+              <g font-size="9" fill="#2e7d32" font-weight="700" text-anchor="middle">
+                <text x="20" y="98">&#8358;9m</text><text x="66" y="84">&#8358;11m</text><text x="112" y="10">&#8358;22m</text>
+                <text x="158" y="128">&#8358;8m</text><text x="204" y="61">&#8358;15m</text><text x="250" y="84">&#8358;11m</text>
+              </g>
+              <g font-size="9" fill="#7a8494" text-anchor="middle">
+                <text x="20" y="145">Jan</text><text x="66" y="145">Feb</text><text x="112" y="145">Mar</text>
+                <text x="158" y="145">Apr</text><text x="204" y="145">May</text><text x="250" y="145">Jun</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Top five Product</h2>
+          <div class="hbars">
+            <div class="hbar-row"><span class="lbl">Printer</span><span class="track"><span class="fill fill-orange" style="width:28%"></span></span><span class="val">&#8358;5m</span></div>
+            <div class="hbar-row"><span class="lbl">Standing Desk</span><span class="track"><span class="fill fill-orange" style="width:28%"></span></span><span class="val">&#8358;5m</span></div>
+            <div class="hbar-row"><span class="lbl">Android Phone</span><span class="track"><span class="fill fill-orange" style="width:61%"></span></span><span class="val">&#8358;11m</span></div>
+            <div class="hbar-row"><span class="lbl">Laptop Air 13</span><span class="track"><span class="fill fill-orange" style="width:72%"></span></span><span class="val">&#8358;13m</span></div>
+            <div class="hbar-row"><span class="lbl">Laptop Pro 14</span><span class="track"><span class="fill fill-orange" style="width:100%"></span></span><span class="val">&#8358;18m</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row3">
+        <div class="panel">
+          <h2>Orders by Salespersons</h2>
+          <div class="hbars">
+            <div class="hbar-row"><span class="lbl">Kunle</span><span class="track"><span class="fill fill-gray" style="width:55%"></span></span><span class="val">12</span></div>
+            <div class="hbar-row"><span class="lbl">Sade</span><span class="track"><span class="fill fill-gray" style="width:55%"></span></span><span class="val">12</span></div>
+            <div class="hbar-row"><span class="lbl">Nneka</span><span class="track"><span class="fill fill-gray" style="width:59%"></span></span><span class="val">13</span></div>
+            <div class="hbar-row"><span class="lbl">Uche</span><span class="track"><span class="fill fill-gray" style="width:64%"></span></span><span class="val">14</span></div>
+            <div class="hbar-row"><span class="lbl">Ada</span><span class="track"><span class="fill fill-gray" style="width:68%"></span></span><span class="val">15</span></div>
+            <div class="hbar-row"><span class="lbl">Ibrahim</span><span class="track"><span class="fill fill-gray" style="width:68%"></span></span><span class="val">15</span></div>
+            <div class="hbar-row"><span class="lbl">Bola</span><span class="track"><span class="fill fill-gray" style="width:77%"></span></span><span class="val">17</span></div>
+            <div class="hbar-row"><span class="lbl">Tunde</span><span class="track"><span class="fill fill-gray" style="width:82%"></span></span><span class="val">18</span></div>
+            <div class="hbar-row"><span class="lbl">Chika</span><span class="track"><span class="fill fill-gray" style="width:100%"></span></span><span class="val">22</span></div>
+            <div class="hbar-row"><span class="lbl">Mariam</span><span class="track"><span class="fill fill-gray" style="width:100%"></span></span><span class="val">22</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Revenue by region</h2>
+          <div class="hbars">
+            <div class="hbar-row"><span class="lbl">Kano</span><span class="track"><span class="fill fill-gray" style="width:7%"></span></span><span class="val">&#8358;2m</span></div>
+            <div class="hbar-row"><span class="lbl">Calabar</span><span class="track"><span class="fill fill-gray" style="width:19%"></span></span><span class="val">&#8358;5m</span></div>
+            <div class="hbar-row"><span class="lbl">Enugu</span><span class="track"><span class="fill fill-gray" style="width:19%"></span></span><span class="val">&#8358;5m</span></div>
+            <div class="hbar-row"><span class="lbl">Uyo</span><span class="track"><span class="fill fill-gray" style="width:22%"></span></span><span class="val">&#8358;6m</span></div>
+            <div class="hbar-row"><span class="lbl">Ibadan</span><span class="track"><span class="fill fill-gray" style="width:37%"></span></span><span class="val">&#8358;10m</span></div>
+            <div class="hbar-row"><span class="lbl">Port Harcourt</span><span class="track"><span class="fill fill-gray" style="width:37%"></span></span><span class="val">&#8358;10m</span></div>
+            <div class="hbar-row"><span class="lbl">Abuja</span><span class="track"><span class="fill fill-gray" style="width:41%"></span></span><span class="val">&#8358;11m</span></div>
+            <div class="hbar-row"><span class="lbl">Lagos</span><span class="track"><span class="fill fill-gray" style="width:100%"></span></span><span class="val">&#8358;27m</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Revenue by Payment Method</h2>
+          <div class="pie-wrap">
+            <div class="pie"></div>
+            <div class="pie-legend">
+              <span><i class="dot" style="background:#1f3864"></i>Card &mdash; 41%</span>
+              <span><i class="dot" style="background:#2e8b8b"></i>Cash &mdash; 22%</span>
+              <span><i class="dot" style="background:#e8a33d"></i>POS &mdash; 20%</span>
+              <span><i class="dot" style="background:#c0504d"></i>Transfer &mdash; 17%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
