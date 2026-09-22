@@ -109,6 +109,7 @@
   .sectionhead{max-width:640px; margin-bottom:48px;}
   .sectionhead h2{font-size:clamp(26px,3.4vw,34px); font-weight:800; margin:8px 0 12px; color:var(--ink);}
   .sectionhead p{color:var(--ink-dim); font-size:15.5px;}
+  .sectionhead .eyebrow{color:var(--red); font-size:12.5px;}
 
   .projects{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
   @media (max-width:820px){ .projects{grid-template-columns:1fr;} }
@@ -156,6 +157,7 @@
   .skills{background:var(--navy); color:#fff;}
   .skills .sectionhead h2{color:#fff;}
   .skills .sectionhead p{color:#9aa3b8;}
+  .skills .sectionhead .eyebrow{color:var(--red);}
   .skillgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:24px;}
   @media (max-width:760px){ .skillgrid{grid-template-columns:1fr;} }
   .skillcard{background:var(--navy-2); border:1px solid var(--line); border-radius:12px; padding:24px 22px;}
@@ -178,6 +180,18 @@
     background:var(--navy-2); border-color:var(--line); color:#c7cddb; margin-top:24px;
   }
   .skills .certnote b{color:#fff;}
+
+  .certgrid{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  @media (max-width:760px){ .certgrid{grid-template-columns:1fr;} }
+  .certcard{
+    background:var(--white); border:1px solid var(--line-light); border-radius:14px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(16,24,40,.06);
+  }
+  .certcard img{width:100%; display:block; border-bottom:1px solid var(--line-light);}
+  .certcard-body{padding:20px 22px 22px;}
+  .certcard h3{font-size:16px; font-weight:700; margin-bottom:6px; color:var(--ink);}
+  .certcard-body p{color:var(--ink-dim); font-size:13.5px; margin-bottom:14px;}
+  .certmeta{display:flex; align-items:center; justify-content:space-between; font-size:12px; font-weight:700; color:var(--red);}
 
   /* CONNECT / FOOTER */
   .connect{background:var(--navy); color:#fff; text-align:center;}
@@ -409,7 +423,24 @@
   <div class="wrap">
     <div class="sectionhead">
       <p class="eyebrow">Certifications</p>
-      <h2>Learning &amp; Credentials</h2>
+    </div>
+    <div class="certgrid">
+      <div class="certcard">
+        <img src="assets/cert-genai.jpg" alt="10Alytics Business certificate: Generative AI for Data &amp; HR Analytics, Gen. AI Professional Certified Expert, awarded to ThankGod Timipere Austin, 23rd August 2026">
+        <div class="certcard-body">
+          <h3>Generative AI for Data &amp; HR Analytics</h3>
+          <p>Gen. AI Professional &mdash; Certified Expert</p>
+          <div class="certmeta"><span>10Alytics Business</span><span>Aug 2026</span></div>
+        </div>
+      </div>
+      <div class="certcard">
+        <img src="assets/cert-bolsin.jpg" alt="Bolsin Innovations Limited certificate of completion: 12 weeks Data Analytics Training Program, awarded to ThankGod Timipere Austin, 27th September 2025">
+        <div class="certcard-body">
+          <h3>Data Analytics Training Program</h3>
+          <p>12-week program &mdash; data analysis &amp; visualization using Excel, Power BI, SQL, and Python</p>
+          <div class="certmeta"><span>Bolsin Innovations Limited</span><span>Sep 2025</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
